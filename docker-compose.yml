@@ -1,0 +1,32 @@
+# Docker-compose for template app Node, Mongo, Express
+# Written by Dmytro Romanenko dmitrypub@gmail.com 2020
+
+version: "2.4"
+
+services:
+  mongo:
+    image: mongo
+    container_name: drtemplate-mongo
+    restart: always
+    hostname: drtemplate-mongo
+    volumes:
+      - mongodb:/data/db
+    # use different from local mongodb port
+    ports:
+      - "27018:27017"
+  nodeapp:
+    build:
+      context: .
+      target: dev
+    container_name: drtemplate-node
+    volumes:
+      - ./app:/var/src/app
+      - node_modules:/var/src/app/node_modules
+    depends_on:
+      - mongo
+    ports:
+      - 3000:3000
+
+volumes:
+  mongodb:
+  node_modules:
