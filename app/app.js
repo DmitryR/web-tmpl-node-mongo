@@ -12,8 +12,6 @@ const globalErrorHandler = require('./controllers/errorController');
 
 const app = express();
 
-app.set('views', path.join(__dirname, 'views'));
-
 // 1. sequrity http headers
 app.use(helmet());
 

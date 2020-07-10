@@ -13,9 +13,9 @@
   ],
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon server.js",
-    "prod": "node server.js",
-    "debug": "ndb server.js"
+    "dev": "nodemon server.js --legacy-watch -e NODE_ENV=development",
+    "prod": "node server.js -e NODE_ENV=production",
+    "debug": "ndb server.js -e NODE_ENV=test"
   },
   "license": "ISC",
   "dependencies": {

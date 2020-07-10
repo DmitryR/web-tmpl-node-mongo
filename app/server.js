@@ -10,9 +10,8 @@ process.on('uncaughtException', err => {
 });
 
 // 2. prepare connection str to mongo database
-dotenv.config({ path: `${__dirname}/config.env` });
-// const cbConnectionStr = process.env.DB_CONNECTION_SERVER.replace(
-const cbConnectionStr = process.env.DB_CONNECTION_LOCAL.replace(
+dotenv.config({ path: `${__dirname}/.env` });
+const cbConnectionStr = process.env.DB_CONNECTION_URL.replace(
   '<PASSWORD>',
   process.env.DB_PASSWORD
 );
@@ -34,7 +33,7 @@ mongoose
 
 const app = require('./app');
 
-const port = process.env.PORT;
+const port = process.env.API_PORT;
 const server = app.listen(port, () => {
   console.log(`App running on port ${port} ...`);
 });

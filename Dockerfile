@@ -9,7 +9,7 @@ WORKDIR /var/src/app
 COPY ./app/package*.json ./
 RUN npm config list
 RUN npm cache clean --force
-ENV PATH /var/src/app node_modules/.bin:$PATH
+ENV PATH /var/src/app/node_modules/.bin:$PATH
 
 # development
 # docker build --target dev -t drtemplate:dev  .
@@ -17,7 +17,7 @@ FROM base as dev
 ENV NODE_ENV=development
 RUN npm ci && npm install --only-development && npm cache clean --force
 USER node
-CMD ["npm", "start", "dev"]
+CMD ["npm", "run", "dev"]
 
 # production
 # docker build --target prod -t drtemplate:prod  .
@@ -28,7 +28,7 @@ COPY ./app ./
 RUN npm config list
 RUN npm install --only-production && npm cache clean --force
 USER node
-CMD ["npm", "start", "prod"]
+CMD ["npm", "run", "prod"]
 
 # test
 # docker build --target test -t drtemplate:test  .
@@ -39,4 +39,4 @@ WORKDIR /var/src/app
 RUN npm audit --audit-level=critical
 WORKDIR /var/src/test
 USER root
-CMD ["node", "test.js"]
+CMD ["npm", "run", "test"]

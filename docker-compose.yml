@@ -11,9 +11,8 @@ services:
     hostname: drtemplate-mongo
     volumes:
       - mongodb:/data/db
-    # use different from local mongodb port
     ports:
-      - "27018:27017"
+      - "27017:27017"
   nodeapp:
     build:
       context: .
@@ -26,6 +25,7 @@ services:
       - mongo
     ports:
       - 3000:3000
+    command: /var/src/app/node_modules/.bin/nodemon server.js
 
 volumes:
   mongodb:
